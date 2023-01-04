@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/userRoute");
+const postRouter = require("./routes/postRoute");
 
 const app = express();
 require("dotenv").config();
@@ -15,6 +16,7 @@ app.use(cookieParser());
 
 //routes
 app.use("/api", userRouter);
+app.use("/api", postRouter);
 
 app.get("/", (req, res) => {
   res.send("Hi there");

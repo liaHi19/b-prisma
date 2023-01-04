@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 
 const prisma = require("../prisma/index");
 
-const loggedIn = async (req, res, next) => {
+const isLoggedIn = async (req, res, next) => {
   try {
-    const token = req.cookie.token;
+    const token = req.cookies.token;
     if (!token) {
       res.json({ message: "Please log in" });
       throw new Error("You are not logged in");
@@ -19,6 +19,9 @@ const loggedIn = async (req, res, next) => {
 
     next();
   } catch (error) {
+    res.json({ message: error.message });
     throw new Error(error);
   }
 };
+
+module.exports = isLoggedIn;
